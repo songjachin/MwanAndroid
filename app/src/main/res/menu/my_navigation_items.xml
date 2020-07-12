@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:icon="@mipmap/ic_home"
+        android:title="@string/text_home" />
+
+    <item
+        android:id="@+id/talk"
+        android:icon="@mipmap/ic_talk"
+        android:title="@string/text_talk" />
+    <item
+        android:id="@+id/project"
+        android:icon="@mipmap/ic_project"
+        android:title="@string/text_project" />
+    <item
+        android:id="@+id/mine"
+        android:icon="@mipmap/ic_mine"
+        android:title="@string/text_mine" />
+
+</menu>

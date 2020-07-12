@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">MwanAndroid</string>
+
+    <string name="text_home">首页</string>
+
+    <string name="text_network_error_tips">网络出错，请点击重试…</string>
+
+    <string name="text_loading_tips">玩命加载中…</string>
+    <string name="empty_string">内容为空…</string>
+    <string name="text_talk">问答</string>
+    <string name="text_project">体系</string>
+    <string name="text_mine">我的</string>
+    <string name="text_search_tips">输入关键词</string>
+    <string name="looper_view_title">这里是标题</string>
+
 </resources>
