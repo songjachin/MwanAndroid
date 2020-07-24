@@ -3,7 +3,13 @@ package com.songjachin.mwanandroid.ui.home;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Rect;
+<<<<<<< HEAD
 import android.text.TextUtils;
+=======
+
+import android.text.TextUtils;
+import android.util.Log;
+>>>>>>> 7f475a1... finish the most
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +31,11 @@ import com.songjachin.mwanandroid.base.BaseFragment;
 import com.songjachin.mwanandroid.customview.MyBanner;
 import com.songjachin.mwanandroid.customview.SelfNestedScrollView;
 import com.songjachin.mwanandroid.database.HistoryArticle;
+<<<<<<< HEAD
+=======
+import com.songjachin.mwanandroid.model.domain.ArticleBean;
+import com.songjachin.mwanandroid.model.domain.ArticleHomeBean;
+>>>>>>> 7f475a1... finish the most
 import com.songjachin.mwanandroid.model.domain.BannerBean;
 import com.songjachin.mwanandroid.model.domain.IBaseArticleInfo;
 import com.songjachin.mwanandroid.presenter.CollectionUtils;
@@ -32,6 +43,10 @@ import com.songjachin.mwanandroid.presenter.ICollectCallback;
 import com.songjachin.mwanandroid.presenter.IUnCollectCallback;
 import com.songjachin.mwanandroid.presenter.home.HomePresenter;
 import com.songjachin.mwanandroid.presenter.mine.HistoryPresenter;
+<<<<<<< HEAD
+=======
+import com.songjachin.mwanandroid.ui.MainActivity;
+>>>>>>> 7f475a1... finish the most
 import com.songjachin.mwanandroid.ui.SearchActivity;
 import com.songjachin.mwanandroid.ui.adapters.BannerAdapter;
 import com.songjachin.mwanandroid.ui.adapters.HomeArticleAdapter;

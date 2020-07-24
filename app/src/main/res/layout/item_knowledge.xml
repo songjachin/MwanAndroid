@@ -18,6 +18,12 @@
             android:textSize="@dimen/text_content"
             tools:text="有多少个字可以填充" />
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 7f475a1... finish the most
     <com.google.android.flexbox.FlexboxLayout
         android:id="@+id/flex_box_layout"
         android:layout_width="match_parent"

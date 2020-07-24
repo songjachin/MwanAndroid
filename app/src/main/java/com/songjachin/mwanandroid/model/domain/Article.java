@@ -6,7 +6,10 @@ import java.util.List;
  * Created by matthew
  */
 public class Article {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7f475a1... finish the most
     /**
      * apkLink :
      * author : 浪淘沙xud

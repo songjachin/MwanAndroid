@@ -19,6 +19,7 @@ import com.songjachin.mwanandroid.model.domain.BaseResponse;
 import com.songjachin.mwanandroid.model.domain.Login;
 import com.songjachin.mwanandroid.ui.home.HomeFragment;
 import com.songjachin.mwanandroid.ui.mine.MineFragment;
+<<<<<<< HEAD
 import com.songjachin.mwanandroid.ui.mine.User;
 import com.songjachin.mwanandroid.ui.navigation.NavigationFragment;
 import com.songjachin.mwanandroid.ui.talk.TalkFragment;
@@ -26,6 +27,11 @@ import com.songjachin.mwanandroid.ui.wx.WxFragment;
 import com.songjachin.mwanandroid.utils.RetrofitManager;
 
 import java.net.HttpURLConnection;
+=======
+import com.songjachin.mwanandroid.ui.navigation.NavigationFragment;
+import com.songjachin.mwanandroid.ui.talk.TalkFragment;
+import com.songjachin.mwanandroid.ui.wx.WxFragment;
+>>>>>>> 7f475a1... finish the most
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

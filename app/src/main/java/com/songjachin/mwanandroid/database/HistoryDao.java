@@ -45,9 +45,15 @@ public class HistoryDao implements IHistoryDao {
             boolean isSuccess = false;
             try {
                 db = mDbHelper.getWritableDatabase();
+<<<<<<< HEAD
                 db.beginTransaction();
                 int delete = db.delete(Constant.HISTORY_TB_NAME, Constant.HISTORY_ARTICLE_ID + "=?",
                         new String[]{article.getArticleId() + ""});
+=======
+                int delete = db.delete(Constant.HISTORY_TB_NAME, Constant.HISTORY_ARTICLE_ID + "=?",
+                        new String[]{article.getArticleId() + ""});
+                db.beginTransaction();
+>>>>>>> 7f475a1... finish the most
                 ContentValues values = new ContentValues();
                 values.put(Constant.HISTORY_ARTICLE_ID, article.getArticleId());
                 values.put(Constant.HISTORY_AUTHOR, article.getAuthor());
@@ -81,7 +87,11 @@ public class HistoryDao implements IHistoryDao {
             try{
                 db = mDbHelper.getWritableDatabase();
                 db.beginTransaction();
+<<<<<<< HEAD
                 int delete = db.delete(Constant.HISTORY_TB_NAME, Constant.HISTORY_ARTICLE_ID+"=?",
+=======
+                int delete = db.delete(Constant.HISTORY_TB_NAME, Constant.HISTORY_ARTICLE_ID,
+>>>>>>> 7f475a1... finish the most
                         new String[]{article.getArticleId() + ""});
                 db.setTransactionSuccessful();
                 isDelSuccess =true;
@@ -168,7 +178,11 @@ public class HistoryDao implements IHistoryDao {
                     db.close();
                 }
                 LogUtils.d(this,"histories----->"+histories.size());
+<<<<<<< HEAD
                 if (mDaoCallback != null&&histories.size()!=0) {
+=======
+                if (mDaoCallback != null) {
+>>>>>>> 7f475a1... finish the most
                     mDaoCallback.onHistoriesLoaded(histories);
                 }
             }

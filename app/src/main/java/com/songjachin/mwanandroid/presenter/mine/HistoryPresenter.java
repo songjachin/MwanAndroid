@@ -10,8 +10,11 @@ import com.songjachin.mwanandroid.view.mine.IHistoryCallback;
 
 import java.util.ArrayList;
 import java.util.List;
+<<<<<<< HEAD
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+=======
+>>>>>>> 7f475a1... finish the most
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -27,8 +30,11 @@ public class HistoryPresenter implements IHistoryPresenter, IHistoryDaoCallback 
     private List<HistoryArticle> mCurrentHistories = new ArrayList<>();
     private HistoryArticle mCurrentAddArticle = null;
 
+<<<<<<< HEAD
     public static ExecutorService threadPool = Executors.newSingleThreadExecutor();
 
+=======
+>>>>>>> 7f475a1... finish the most
     private HistoryPresenter(){
         mHistoryDao = HistoryDao.getInstance();
         mHistoryDao.setCallback(this);
@@ -50,6 +56,7 @@ public class HistoryPresenter implements IHistoryPresenter, IHistoryDaoCallback 
 
     @Override
     public void listHistories() {
+<<<<<<< HEAD
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -72,6 +79,14 @@ public class HistoryPresenter implements IHistoryPresenter, IHistoryDaoCallback 
 //
 //            }
 //        });
+=======
+        //被观察者创建
+        Observable.create(emitter -> {
+            if(mHistoryDao != null) {
+                mHistoryDao.listHistories();
+            }
+        }).subscribeOn(Schedulers.io()).subscribe();
+>>>>>>> 7f475a1... finish the most
     }
 
     private  boolean isDoDelAsOutOfSize = false;

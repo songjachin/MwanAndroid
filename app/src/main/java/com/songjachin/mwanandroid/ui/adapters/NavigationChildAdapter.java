@@ -11,6 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.flexbox.FlexboxLayout;
 import com.songjachin.mwanandroid.R;
 import com.songjachin.mwanandroid.model.domain.NaviBean;
+<<<<<<< HEAD
+=======
+import com.songjachin.mwanandroid.ui.navigation.NavigationChildFragment;
+>>>>>>> 7f475a1... finish the most
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -69,6 +73,7 @@ public class NavigationChildAdapter extends RecyclerView.Adapter<NavigationChild
 
         public void setData(NaviBean.DataBean item) {
             textKnowledge.setText(item.getName());
+<<<<<<< HEAD
             /*
              *以下是为了做缓存，由log可知，做了缓存之后绑定大约需要118次create TextView，否则每次绑定都要create
              */
@@ -77,6 +82,8 @@ public class NavigationChildAdapter extends RecyclerView.Adapter<NavigationChild
                 View childAt = mFlex.getChildAt(i);
                 mFlexItemTextViewCaches.offer((TextView) childAt);
             }
+=======
+>>>>>>> 7f475a1... finish the most
             mFlex.removeAllViews();
             List<NaviBean.DataBean.ArticlesBean> articles = item.getArticles();
             for (NaviBean.DataBean.ArticlesBean article : articles) {

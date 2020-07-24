@@ -1,6 +1,9 @@
 package com.songjachin.mwanandroid.ui.adapters;
 
+<<<<<<< HEAD
 import android.util.Log;
+=======
+>>>>>>> 7f475a1... finish the most
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +14,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.flexbox.FlexboxLayout;
 import com.songjachin.mwanandroid.R;
+<<<<<<< HEAD
 import com.songjachin.mwanandroid.model.domain.KnowledgeBean;
+=======
+import com.songjachin.mwanandroid.customview.TextFlowLayout;
+import com.songjachin.mwanandroid.model.domain.KnowledgeBean;
+import com.songjachin.mwanandroid.utils.LogUtils;
+>>>>>>> 7f475a1... finish the most
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -72,6 +81,7 @@ public class KnowledgeAdapter extends RecyclerView.Adapter<KnowledgeAdapter.Inne
 
         public void setData(KnowledgeBean.DataBean item) {
             textKnowledge.setText(item.getName());
+<<<<<<< HEAD
             /*
             *以下是为了做缓存，由log可知，做了缓存之后绑定大约需要118次create TextView，否则每次绑定都要create
              */
@@ -81,6 +91,8 @@ public class KnowledgeAdapter extends RecyclerView.Adapter<KnowledgeAdapter.Inne
                 mFlexItemTextViewCaches.offer((TextView) childAt);
             }
 
+=======
+>>>>>>> 7f475a1... finish the most
             //textList.clear();
             mFlex.removeAllViews();
             List<KnowledgeBean.DataBean.ChildrenBean> children = item.getChildren();
@@ -113,17 +125,25 @@ public class KnowledgeAdapter extends RecyclerView.Adapter<KnowledgeAdapter.Inne
 
 
     private TextView createOrGetCacheFlexItemTextView(FlexboxLayout fbl) {
+<<<<<<< HEAD
         Log.d(TAG, "createOrGetCacheFlexItemTextView: "+mFlexItemTextViewCaches.size());
+=======
+>>>>>>> 7f475a1... finish the most
         TextView tv = mFlexItemTextViewCaches.poll();
         if (tv != null) {
             return tv;
         }
         return createFlexItemTextView(fbl);
     }
+<<<<<<< HEAD
     private  int i = 0;
     private TextView createFlexItemTextView(FlexboxLayout fbl) {
         i++;
         Log.d(TAG, "createFlexItemTextView: -----"+i);
+=======
+
+    private TextView createFlexItemTextView(FlexboxLayout fbl) {
+>>>>>>> 7f475a1... finish the most
         if (mInflater == null) {
             mInflater = LayoutInflater.from(fbl.getContext());
         }

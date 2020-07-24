@@ -3,6 +3,10 @@ package com.songjachin.mwanandroid.ui.mine;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
+<<<<<<< HEAD
+=======
+import android.widget.ImageView;
+>>>>>>> 7f475a1... finish the most
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -14,6 +18,11 @@ import com.songjachin.mwanandroid.model.domain.Login;
 import com.songjachin.mwanandroid.model.domain.Ranking;
 import com.songjachin.mwanandroid.presenter.mine.MinePresenter;
 import com.songjachin.mwanandroid.view.mine.IMineCallback;
+<<<<<<< HEAD
+=======
+
+import java.io.Serializable;
+>>>>>>> 7f475a1... finish the most
 
 import butterknife.BindView;
 
@@ -61,6 +70,13 @@ public class MineFragment extends BaseFragment implements IMineCallback {
                 startActivityForResult(intent, 1);
             }
         });
+<<<<<<< HEAD
+=======
+        if (User.getInstance().isLoginStatus()) {
+            tvUserName.setText(User.getInstance().getUsername());
+            tvUserName.setClickable(false);
+        }
+>>>>>>> 7f475a1... finish the most
         mRanking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,7 +100,11 @@ public class MineFragment extends BaseFragment implements IMineCallback {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mActivity, HistoryActivity.class);
+<<<<<<< HEAD
                 startActivity(intent);
+=======
+                startActivityForResult(intent, 1);
+>>>>>>> 7f475a1... finish the most
             }
         });
         logout.setOnClickListener(new View.OnClickListener() {
@@ -94,6 +114,7 @@ public class MineFragment extends BaseFragment implements IMineCallback {
                tvUserName.setText("点击登录");
                tvUserName.setClickable(true);
                tvUserId.setText("");
+<<<<<<< HEAD
                 tvUserLevel.setText("");
                 tvUserRanking.setText("");
                 digitRank.setText("我的积分：");
@@ -109,6 +130,10 @@ public class MineFragment extends BaseFragment implements IMineCallback {
             tvUserName.setClickable(false);
         }
         super.onResume();
+=======
+            }
+        });
+>>>>>>> 7f475a1... finish the most
     }
 
     @Override
@@ -131,6 +156,28 @@ public class MineFragment extends BaseFragment implements IMineCallback {
     protected void release() {
         mPresenter.unregisterViewCallback(this);
     }
+<<<<<<< HEAD
+=======
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != Activity.RESULT_OK) return;
+        if (requestCode == 1) {
+            //refersh
+            Login info = (Login)data.getSerializableExtra("login_info");
+            if(info.getUsername()!=null){
+                tvUserName.setText(info.getUsername());
+                tvUserName.setClickable(false);
+            }
+
+            mPresenter.getRanking();
+        }
+    }
+
+    @Override
+    public void onError() {
+>>>>>>> 7f475a1... finish the most
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -151,6 +198,29 @@ public class MineFragment extends BaseFragment implements IMineCallback {
     @Override
     public void onError() {
         setUpState(State.ERROR);
+    }
+
+    @Override
+    public void onLoading() {
+
+    }
+
+    @Override
+    public void onEmpty() {
+
+    }
+
+    @Override
+    public void onRankingInfo(Ranking data) {
+        String level = data.getLevel()+"";
+        String rank = data.getRank()+"";
+        String userId= data.getUserId()+"";
+        String rankNum ="我的积分: "+ data.getCoinCount();
+
+        tvUserLevel.setText(level);
+        tvUserRanking.setText(rank);
+        tvUserId.setText(userId);
+        digitRank.setText(rankNum);
     }
 
     @Override
