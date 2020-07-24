@@ -14,8 +14,9 @@ import com.songjachin.mwanandroid.R;
 import com.songjachin.mwanandroid.base.BaseFragment;
 import com.songjachin.mwanandroid.ui.home.HomeFragment;
 import com.songjachin.mwanandroid.ui.mine.MineFragment;
-import com.songjachin.mwanandroid.ui.project.ProjectFragment;
+import com.songjachin.mwanandroid.ui.navigation.NavigationFragment;
 import com.songjachin.mwanandroid.ui.talk.TalkFragment;
+import com.songjachin.mwanandroid.ui.wx.WxFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,8 +31,9 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView mNavigationView;
     private HomeFragment mHomeFragment;
     private TalkFragment mTalkFragment;
-    private ProjectFragment mProjectFragment;
+    private NavigationFragment mNavigationFragment;
     private MineFragment mMineFragment;
+    private WxFragment mWxFragment;
     private FragmentManager mFm;
 
     @Override
@@ -52,13 +54,14 @@ public class MainActivity extends AppCompatActivity {
         mHomeFragment = new HomeFragment();
         mTalkFragment = new TalkFragment();
         mMineFragment = new MineFragment();
-        mProjectFragment = new ProjectFragment();
+        mNavigationFragment = new NavigationFragment();
+        mWxFragment = new WxFragment();
         mFm = getSupportFragmentManager();
         switchFragment(mHomeFragment);
     }
 
     private BaseFragment lastFragment = null;
-    private void switchFragment(BaseFragment targetFragment) {
+    protected void switchFragment(BaseFragment targetFragment) {
 
         //如果上一个fragment跟当前要切换的fragment是同一个，那么不需要切换
         if(lastFragment == targetFragment) {
@@ -91,10 +94,13 @@ public class MainActivity extends AppCompatActivity {
                         switchFragment(mTalkFragment);
                         break;
                     case R.id.project:
-                        switchFragment(mProjectFragment);
+                        switchFragment(mNavigationFragment);
                         break;
                     case R.id.mine:
                         switchFragment(mMineFragment);
+                        break;
+                    case R.id.wx:
+                        switchFragment(mWxFragment);
                         break;
                     default: break;
                 }

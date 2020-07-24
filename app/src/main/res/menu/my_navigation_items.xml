@@ -11,11 +11,16 @@
         android:title="@string/text_talk" />
     <item
         android:id="@+id/project"
-        android:icon="@mipmap/ic_project"
-        android:title="@string/text_project" />
+        android:icon="@mipmap/ic_navigation"
+        android:title="@string/text_navigation" />
+    <item
+        android:id="@+id/wx"
+        android:icon="@mipmap/ic_wx"
+        android:title="@string/text_wx" />
     <item
         android:id="@+id/mine"
         android:icon="@mipmap/ic_mine"
         android:title="@string/text_mine" />
+
 
 </menu>

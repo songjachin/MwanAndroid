@@ -2,86 +2,140 @@ package com.songjachin.mwanandroid.base;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.songjachin.mwanandroid.utils.LogUtils;
+
 /**
  * Created by matthew
  */
 public abstract class BaseLazyFragment extends Fragment {
-    private boolean isViewCreated = false;//布局是否被创建
-    private boolean isLoadData = false;//数据是否加载
-    private boolean isFirstVisible = true;//是否第一次可见
-    private String TAG = "BaseLazy";
 
+
+    @Nullable
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        isViewCreated = true;
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        return super.onCreateView(inflater, container, savedInstanceState);
+
     }
 
+    //    abstract class LazyFragment :
+//
+//    Fragment() {
+//
+//        /**
+//         * 是否执行懒加载
+//         */
+//        private var isLoaded = false
+    private boolean isLoaded = false;
+    //        /**
+//         * 当前Fragment是否对用户可见
+//         */
+//        private var isVisibleToUser = false
+    private boolean isVisibleToUser = false;
+    //        /**
+//         * 当使用ViewPager+Fragment形式会调用该方法时，setUserVisibleHint会优先Fragment生命周期函数调用，
+//         * 所以这个时候就,会导致在setUserVisibleHint方法执行时就执行了懒加载，
+//         * 而不是在onResume方法实际调用的时候执行懒加载。所以需要这个变量
+//         */
+//        private var isCallResume = false
+    private boolean isCallResume = false;
+    //        /**
+//         * 是否调用了setUserVisibleHint方法。处理show+add+hide模式下，默认可见 Fragment 不调用
+//         * onHiddenChanged 方法，进而不执行懒加载方法的问题。
+//         */
+//        private var isCallUserVisibleHint = false
+    private boolean isCallUserVisibleHint = false;
+//        override fun onResume() {
+//            super.onResume()
+//            isCallResume = true
+//            if (!isCallUserVisibleHint) isVisibleToUser = !isHidden
+//            judgeLazyInit()
+//        }
+//
+
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        if(isFragmentVisible(this) && this.isAdded()){
-            if (this.getParentFragment() == null || isFragmentVisible(this.getParentFragment())) {
-                onLazyLoadData();
-                isLoadData = true;
-                if(isFirstVisible)
-                    isFirstVisible = false;
-            }
+    public void onResume() {
+        super.onResume();
+        LogUtils.d(this,"cc onResume");
+        isCallResume =true;
+        if(!isCallUserVisibleHint) isVisibleToUser = !isHidden();
+        judgeLazyInit();
+    }
+
+//        private fun judgeLazyInit () {
+//            if (!isLoaded && isVisibleToUser && isCallResume) {
+//                lazyInit()
+//                Log.d(TAG, "lazyInit:!!!!!!!”)
+//                        isLoaded = true
+//            }
+//        }
+
+    private void judgeLazyInit(){
+        if(!isLoaded && isVisibleToUser && isCallResume){
+            lazyInit();
+            isLoaded = true;
         }
     }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        Log.d(TAG, "setUserVisibleHint(): "
-                + " hide: " + this.isHidden()
-                + " add :" + this.isAdded()
-                + " visible: " + this.isVisible()
-                + " resumed: " + this.isResumed());
-        if(isFragmentVisible(this) && !isLoadData && isViewCreated && this.isAdded()){
-            onLazyLoadData();
-            isLoadData = true;
-        }
-    }
+//        override fun onHiddenChanged(hidden:Boolean){
+//            super.onHiddenChanged(hidden)
+//            isVisibleToUser = !hidden
+//            judgeLazyInit()
+//        }
 
 
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        Log.d(TAG, "onHiddenChanged(): "
-                + " hide: " + this.isHidden()
-                + " add :" + this.isAdded()
-                + " visible: " + this.isVisible()
-                + " resumed: " + this.isResumed());
-        //onHiddenChanged调用在Resumed之前，所以此时可能fragment被add, 但还没resumed
-        if(!hidden && !this.isResumed())
-            return;
-        //使用hide和show时，fragment的所有生命周期方法都不会调用，除了onHiddenChanged（）
-        if(!hidden && isFirstVisible && this.isAdded()){
-            onLazyLoadData();
-            isFirstVisible = false;
-        }
+        LogUtils.d(this,"cc onHiddenChanged : hidden--"+hidden);
+        isVisibleToUser = !hidden;
+        judgeLazyInit();
     }
 
-    protected abstract void onLazyLoadData();
+    //        override fun onDestroyView() {
+//            super.onDestroyView()
+//            isLoaded = false
+//            isVisibleToUser = false
+//            isCallUserVisibleHint = false
+//            isCallResume = false
+//        }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        isViewCreated = false;
-        isLoadData = false;
-        isFirstVisible = true;
+
+        isLoaded =false;
+        isVisibleToUser = false;
+        isCallUserVisibleHint =false;
+        isCallResume = false;
     }
 
-    /**
-     * 当前Fragment是否可见
-     */
-    private boolean isFragmentVisible(Fragment fragment) {
-        return !fragment.isHidden() && fragment.getUserVisibleHint();
+    //        override fun setUserVisibleHint(isVisibleToUser:Boolean){
+//            super.setUserVisibleHint(isVisibleToUser)
+//            this.isVisibleToUser = isVisibleToUser
+//            isCallUserVisibleHint = true
+//            judgeLazyInit()
+//        }
+
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        LogUtils.d(this,"cc setUserVisibleHint-->"+isVisibleToUser);
+        super.setUserVisibleHint(isVisibleToUser);
+        this.isVisibleToUser = isVisibleToUser;
+        isCallUserVisibleHint = true;
+        judgeLazyInit();
     }
+
+    //        abstract fun lazyInit ()
+//    }
+    protected abstract void lazyInit();
+
 }

@@ -51,4 +51,9 @@
     <color name="text_invert">#ffffff</color>
     <color name="text_invert_alpha">#88ffffff</color>
     <color name="text_on_main">#ffffff</color>
+    <color name="colorTabSelected">#ffffff</color>
+    <color name="colorTabNormal">#99ffffff</color>
+    <color name="colorEEEEEE">#66ffffff</color>
+    <color name="colorPageBg">#EFEEEE</color>
+    <color name="basic_ui_action_bar_text">#00ffff</color>
 </resources>

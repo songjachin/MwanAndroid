@@ -32,4 +32,12 @@ public interface IHomeCallback extends IBaseCallback {
      *
      */
     void onLoadMoreLoaded( List<? extends IBaseArticleInfo> data);
+
+    void onCollectSuccessful();
+
+    void onCollectFail();
+
+    void onUnCollectSuccessful();
+
+    void onUnCollectFail();
 }

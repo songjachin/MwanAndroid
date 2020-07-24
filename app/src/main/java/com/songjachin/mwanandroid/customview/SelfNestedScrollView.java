@@ -44,7 +44,7 @@ public class SelfNestedScrollView extends NestedScrollView {
                                   @ViewCompat.NestedScrollType int type) {
         //        LogUtils.d(this,"dy === > " + dy);
         //父类消耗的不超过一个mHeaderHeight+一次滑动的值
-        LogUtils.d(this,"origin----->"+originScroll+" height--->"+ mHeaderHeight);
+        //LogUtils.d(this,"origin----->"+originScroll+" height--->"+ mHeaderHeight);
         if(originScroll < mHeaderHeight) {
             //如果滑动的值小于设定的值，给NestedScrollView消耗
             //Move the scrolled position of your view. This will cause a call to

@@ -240,6 +240,11 @@ public class ArticleHomeBean {
                 this.collect = collect;
             }
 
+            @Override
+            public int getOriginId() {
+                return -1;
+            }
+
             public int getCourseId() {
                 return courseId;
             }

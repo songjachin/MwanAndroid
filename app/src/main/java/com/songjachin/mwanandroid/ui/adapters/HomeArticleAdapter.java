@@ -38,16 +38,16 @@ public class HomeArticleAdapter extends RecyclerView.Adapter<HomeArticleAdapter.
     @Override
     public InnerHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         mNumber++;
-        LogUtils.d(HomeArticleAdapter.class,"-------------create--->"+mNumber);
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_home_list,parent,false);
+        LogUtils.d(HomeArticleAdapter.class, "-------------create--->" + mNumber);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_home_list, parent, false);
         return new InnerHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull InnerHolder holder, int position) {
-        LogUtils.d(HomeArticleAdapter.class,"----------------bind----->"+position);
-        IBaseArticleInfo data =  mData.get(position);
-        holder.setData(data);
+        LogUtils.d(HomeArticleAdapter.class, "----------------bind----->" + position);
+        IBaseArticleInfo data = mData.get(position);
+        holder.setData(data, position);
     }
 
     @Override
@@ -55,12 +55,18 @@ public class HomeArticleAdapter extends RecyclerView.Adapter<HomeArticleAdapter.
         return mData.size();
     }
 
-    public void addData( List<? extends IBaseArticleInfo> data) {
+    public void addData(List<? extends IBaseArticleInfo> data) {
         //添加之前拿到原来的size
         int olderSize = mData.size();
         mData.addAll(data);
         //更新UI
-        notifyItemRangeChanged(olderSize,data.size());
+        notifyItemRangeChanged(olderSize, data.size());
+    }
+
+
+    public void setCollectStatus(int position, boolean b) {
+        mData.get(position).setCollect(b);
+        notifyItemChanged(position);
     }
 
     public class InnerHolder extends RecyclerView.ViewHolder {
@@ -84,27 +90,28 @@ public class HomeArticleAdapter extends RecyclerView.Adapter<HomeArticleAdapter.
         TextView textChapterName;
         @BindView(R.id.cv_collect)
         ImageView collectView;
+
         public InnerHolder(@NonNull View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
         }
 
-        public void setData(IBaseArticleInfo data) {
+        public void setData(IBaseArticleInfo data, int position) {
             Context context = itemView.getContext();
-            if(data.isFresh()){
+            if (data.isFresh()) {
                 textNew.setVisibility(View.VISIBLE);
-            }else{
+            } else {
                 textNew.setVisibility(View.GONE);
             }
-            if(data.isTop()){
+            if (data.isTop()) {
                 textTop.setVisibility(View.VISIBLE);
-            }else{
+            } else {
                 textTop.setVisibility(View.GONE);
             }
-            if(!TextUtils.isEmpty(data.getAuthor())){
+            if (!TextUtils.isEmpty(data.getAuthor())) {
                 textAuthor.setText(data.getAuthor());
-            }else{
-                String str = "["+data.getShareUser()+"]分享";
+            } else {
+                String str = "[" + data.getShareUser() + "]分享";
                 textAuthor.setText(str);
             }
             if (data.getTags() != null && data.getTags().size() > 0) {
@@ -131,7 +138,7 @@ public class HomeArticleAdapter extends RecyclerView.Adapter<HomeArticleAdapter.
             textTitle.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mItemClickListener.onItemTitleClick();
+                    mItemClickListener.onItemTitleClick(data);
                 }
             });
             if (TextUtils.isEmpty(data.getDesc())) {
@@ -144,7 +151,27 @@ public class HomeArticleAdapter extends RecyclerView.Adapter<HomeArticleAdapter.
                 desc = StringUtils.removeAllBank(desc, 2);
                 textDescription.setText(desc);
             }
+            textDescription.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mItemClickListener.onItemTitleClick(data);
+                }
+            });
             textChapterName.setText(Html.fromHtml(formatChapterName(data.getSuperChapterName(), data.getChapterName())));
+
+
+            if (data.isCollect()) {
+                collectView.setImageResource(R.mipmap.ic_collect);
+            } else {
+                collectView.setImageResource(R.mipmap.ic_uncollect);
+            }
+
+            collectView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mItemClickListener.onCollectClick(data, position);
+                }
+            });
         }
 
         private String formatChapterName(String... names) {
@@ -161,17 +188,19 @@ public class HomeArticleAdapter extends RecyclerView.Adapter<HomeArticleAdapter.
         }
     }
 
-    public void setData(List<? extends IBaseArticleInfo> data){
+    public void setData(List<? extends IBaseArticleInfo> data) {
         mData.clear();
         mData.addAll(data);
         notifyDataSetChanged();
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener){
+    public void setOnItemClickListener(OnItemClickListener listener) {
         this.mItemClickListener = listener;
     }
 
-    public interface OnItemClickListener{
-        void onItemTitleClick();
+    public interface OnItemClickListener {
+        void onItemTitleClick(IBaseArticleInfo data);
+
+        void onCollectClick(IBaseArticleInfo data, int position);
     }
 }

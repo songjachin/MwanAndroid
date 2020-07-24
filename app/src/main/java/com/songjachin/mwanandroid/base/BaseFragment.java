@@ -1,5 +1,7 @@
 package com.songjachin.mwanandroid.base;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
@@ -27,6 +29,8 @@ public abstract class BaseFragment extends BaseLazyFragment {
     private View mSuccessView;
     private View mErrorView;
     private View mEmptyView;
+
+    protected Activity mActivity;
 
     public enum State {
         NONE,LOADING,SUCCESS,ERROR,EMPTY
@@ -59,7 +63,13 @@ public abstract class BaseFragment extends BaseLazyFragment {
     }
 
     @Override
-    protected void onLazyLoadData() {
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        mActivity = (Activity) context;
+    }
+
+    @Override
+    protected void lazyInit() {
         loadData();
     }
 

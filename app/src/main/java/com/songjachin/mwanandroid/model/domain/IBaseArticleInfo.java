@@ -29,5 +29,13 @@ public interface IBaseArticleInfo {
 
     List<TagsBean> getTags();
 
+    String getLink();
 
+    boolean isCollect();
+
+    int getId();
+
+    void setCollect(boolean b);
+
+    int getOriginId();
 }

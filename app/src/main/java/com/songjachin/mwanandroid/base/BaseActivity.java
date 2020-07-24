@@ -1,5 +1,6 @@
 package com.songjachin.mwanandroid.base;
 
+import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -21,21 +22,23 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(getLayoutResId());
         mBind = ButterKnife.bind(this);
         initView();
-        initListener();
         initPresenter();
+        initListener();
         loadData();
     }
 
-    protected abstract void loadData();
+
+    protected abstract int getLayoutResId();
+
+    protected abstract void initView();
 
     protected abstract void initPresenter();
 
     protected abstract void initListener();
 
-    protected abstract void initView();
+    protected abstract void loadData();
 
-    protected abstract int getLayoutResId();
-
+    protected abstract void release();
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -44,8 +47,4 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
         this.release();
     }
-    /**
-     * 子类需要释放资源，覆盖即可
-     */
-    protected abstract void release();
 }

@@ -4,6 +4,7 @@ import com.songjachin.mwanandroid.model.Api;
 import com.songjachin.mwanandroid.model.domain.ArticleBean;
 import com.songjachin.mwanandroid.model.domain.ArticleHomeBean;
 import com.songjachin.mwanandroid.model.domain.BannerBean;
+import com.songjachin.mwanandroid.model.domain.BaseResponse;
 import com.songjachin.mwanandroid.model.domain.IBaseArticleInfo;
 import com.songjachin.mwanandroid.utils.LogUtils;
 import com.songjachin.mwanandroid.utils.RetrofitManager;
@@ -94,6 +95,7 @@ public class HomePresenter implements IHomePresenter {
         if (mIHomeCallback != null) {
             mIHomeCallback.onLoading();
         }
+        mPageId = 0;
         Api api = mRetrofit.create(Api.class);
         Call<ArticleBean> task = api.getArticle();
         task.enqueue(new Callback<ArticleBean>() {
@@ -172,13 +174,41 @@ public class HomePresenter implements IHomePresenter {
     }
 
     @Override
-    public void collect() {
+    public void collect(int id) {
+        Api api = mRetrofit.create(Api.class);
+        Call<BaseResponse> collect = api.collect(id);
+        collect.enqueue(new Callback<BaseResponse>() {
+            @Override
+            public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+                if (response.body().getErrorCode()==0) {
+                    mIHomeCallback.onCollectSuccessful();
+                }
+            }
 
+            @Override
+            public void onFailure(Call<BaseResponse> call, Throwable t) {
+                mIHomeCallback.onCollectFail();
+            }
+        });
     }
 
     @Override
-    public void unCollect() {
+    public void unCollect(int id) {
+        Api api = mRetrofit.create(Api.class);
+        Call<BaseResponse> baseResponseCall = api.unCollect(id,-1);
+        baseResponseCall.enqueue(new Callback<BaseResponse>() {
+            @Override
+            public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+                if (response.body().getErrorCode()==0) {
+                    mIHomeCallback.onUnCollectSuccessful();
+                }
+            }
 
+            @Override
+            public void onFailure(Call<BaseResponse> call, Throwable t) {
+                mIHomeCallback.onUnCollectFail();
+            }
+        });
     }
 
     @Override

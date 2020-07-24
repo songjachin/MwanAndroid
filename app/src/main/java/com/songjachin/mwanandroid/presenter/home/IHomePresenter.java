@@ -13,7 +13,7 @@ public interface IHomePresenter extends IBasePresenter<IHomeCallback> {
 
     void loadMore();
 
-    void collect();
+    void collect(int id);
 
-    void unCollect();
+    void unCollect(int id);
 }

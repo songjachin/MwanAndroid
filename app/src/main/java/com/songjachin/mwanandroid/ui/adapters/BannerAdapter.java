@@ -19,20 +19,28 @@ import java.util.List;
 public class BannerAdapter extends MyBanner.InnerPagerAdapter {
 
     private List<BannerBean.DataBean> mList = new ArrayList<>();
+    private OnViewPagerClickListener mViewPagerClickListener;
 
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         if(mList.size() == 0) return null;
         int realPosition = position % mList.size();
-        BannerBean.DataBean dataBean = mList.get(realPosition);
-        String coverUrl = dataBean.getImagePath();
+        BannerBean.DataBean bean = mList.get(realPosition);
+
+        String coverUrl = bean.getImagePath();
         ImageView iv = new ImageView(container.getContext());
         ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         iv.setLayoutParams(layoutParams);
         iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
         Glide.with(container.getContext()).load(coverUrl).into(iv);
 
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mViewPagerClickListener.onPagerItemClick(bean);
+            }
+        });
         container.addView(iv);
         return iv;
     }
@@ -65,5 +73,13 @@ public class BannerAdapter extends MyBanner.InnerPagerAdapter {
         mList.clear();
         mList.addAll(data);
         notifyDataSetChanged();
+    }
+
+    public void setOnViewPagerClick(OnViewPagerClickListener listener){
+        mViewPagerClickListener = listener;
+    }
+
+    public interface OnViewPagerClickListener{
+        void onPagerItemClick(BannerBean.DataBean bean );
     }
 }
