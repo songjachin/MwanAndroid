@@ -41,7 +41,7 @@ public class User implements Serializable {
 
     private String mUsername;//用户名
     private String mPassword;//密码
-    private boolean mLoginStatus;//登陆状态
+    private boolean mLoginStatus = false;//登陆状态
 
     /**
      * 退出登录时使用

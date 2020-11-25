@@ -5,11 +5,9 @@ import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
@@ -66,8 +64,9 @@ public class MyBanner extends LinearLayout {
                 //这个时候我们去获取标题
                 if(mInnerPagerAdapter.getDataSize() == 0) return;
                 int target = position % mInnerPagerAdapter.getDataSize();
-                updateIndicator(target);
                 mTitleView.setText(mInnerPagerAdapter.getTitle(target));
+                updateIndicator(target);
+
             }
 
             @Override
@@ -93,10 +92,11 @@ public class MyBanner extends LinearLayout {
             //先删除
             mPointContainer.removeAllViews();
             int indicatorSize = mInnerPagerAdapter.getDataSize();
+
             for(int i = 0; i < indicatorSize; i++){
                 View point = new View(getContext());
                 int size = SizeUtils.dip2px(getContext(),5);
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(size,size);
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(4*size,size);
                 layoutParams.leftMargin = SizeUtils.dip2px(getContext(), 5);
                 layoutParams.rightMargin = SizeUtils.dip2px(getContext(), 5);
                 point.setLayoutParams(layoutParams);
@@ -115,12 +115,14 @@ public class MyBanner extends LinearLayout {
     public void setAdapter(InnerPagerAdapter adapter){
         mInnerPagerAdapter = adapter;
         mViewPager.setAdapter(mInnerPagerAdapter);
-        mViewPager.setCurrentItem(Integer.MAX_VALUE/2 + 1 );
+        mViewPager.setCurrentItem(Integer.MAX_VALUE/2+1);
     }
 
     public static abstract class InnerPagerAdapter extends PagerAdapter{
         public abstract int getDataSize();
         protected abstract String getTitle(int target);
     }
+
+
 
 }

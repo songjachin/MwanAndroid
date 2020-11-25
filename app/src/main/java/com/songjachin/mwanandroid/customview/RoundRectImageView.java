@@ -16,6 +16,9 @@ public class RoundRectImageView extends AppCompatImageView {
     private float roundRatio = 0.1f;
     private Path path;
 
+    public RoundRectImageView(Context context){
+        this(context,null);
+    }
     public RoundRectImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
@@ -25,7 +28,7 @@ public class RoundRectImageView extends AppCompatImageView {
 
         if (path == null) {
             path = new Path();
-            path.addRoundRect(new RectF(0, 0, getWidth(), getHeight()), roundRatio * getWidth(), roundRatio * getHeight(), Path.Direction.CW);
+            path.addRoundRect(new RectF(0, 0, getWidth(), getHeight()), roundRatio * getHeight(), roundRatio * getHeight(), Path.Direction.CW);
         }
         canvas.save();//保持画布状态
         canvas.clipPath(path);//裁剪不规则区域

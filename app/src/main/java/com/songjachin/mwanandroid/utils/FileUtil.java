@@ -6,7 +6,6 @@ import android.os.Environment;
 import java.io.Closeable;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -24,6 +23,7 @@ public class FileUtil {
      * @param fileName
      * @return
      */
+    //restore 恢复
     public static Object restoreObject(Context context,String fileName){
         FileInputStream fileInputStream = null;
         ObjectInputStream objectInputStream =null;

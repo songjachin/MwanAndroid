@@ -102,12 +102,10 @@ public class SearchPresenter implements ISearchPresenter {
     private void saveHistory(String history){
         Histories histories = mJsonCacheUtil.getValue(KEY_HISTORIES,Histories.class);
         //如果说已经在了，就干掉，然后再添加
-        List<String> historiesList = null;
+        List<String> historiesList = histories.getHistories();
         if(histories != null && histories.getHistories() != null) {
-            historiesList = histories.getHistories();
-            if(historiesList.contains(history)) {
-                historiesList.remove(history);
-            }
+            //两者不空则去重
+            historiesList.remove(history);
         }
         //去重完成
         //处理没有数据的情况
