@@ -1,6 +1,7 @@
 package com.songjachin.mwanandroid.ui;
 
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Unbinder mBind;
 
+    @SuppressLint("NonConstantResourceId")
     @BindView(R.id.main_navigation_bar)
     BottomNavigationView mNavigationView;
     private HomeFragment mHomeFragment;

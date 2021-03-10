@@ -3,9 +3,7 @@ package com.songjachin.mwanandroid.ui.home;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Rect;
-
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,8 +25,6 @@ import com.songjachin.mwanandroid.base.BaseFragment;
 import com.songjachin.mwanandroid.customview.MyBanner;
 import com.songjachin.mwanandroid.customview.SelfNestedScrollView;
 import com.songjachin.mwanandroid.database.HistoryArticle;
-import com.songjachin.mwanandroid.model.domain.ArticleBean;
-import com.songjachin.mwanandroid.model.domain.ArticleHomeBean;
 import com.songjachin.mwanandroid.model.domain.BannerBean;
 import com.songjachin.mwanandroid.model.domain.IBaseArticleInfo;
 import com.songjachin.mwanandroid.presenter.CollectionUtils;
@@ -36,7 +32,6 @@ import com.songjachin.mwanandroid.presenter.ICollectCallback;
 import com.songjachin.mwanandroid.presenter.IUnCollectCallback;
 import com.songjachin.mwanandroid.presenter.home.HomePresenter;
 import com.songjachin.mwanandroid.presenter.mine.HistoryPresenter;
-import com.songjachin.mwanandroid.ui.MainActivity;
 import com.songjachin.mwanandroid.ui.SearchActivity;
 import com.songjachin.mwanandroid.ui.adapters.BannerAdapter;
 import com.songjachin.mwanandroid.ui.adapters.HomeArticleAdapter;
@@ -50,6 +45,7 @@ import com.songjachin.mwanandroid.view.home.IHomeCallback;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 
@@ -64,6 +60,7 @@ public class HomeFragment extends BaseFragment implements IHomeCallback, HomeArt
     LinearLayout mHomeLayout;
     @BindView(R.id.home_nested_scroller)
     SelfNestedScrollView  mNestedScrollView;
+    @SuppressLint("NonConstantResourceId")
     @BindView(R.id.home_search_input_box)
     EditText mSearchInputBox;
     @BindView(R.id.home_refresh)
@@ -98,7 +95,7 @@ public class HomeFragment extends BaseFragment implements IHomeCallback, HomeArt
         mHomeRecyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
             public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
-                outRect.top = SizeUtils.dip2px(getContext(), 1.5f);
+                outRect.top = SizeUtils.dip2px(Objects.requireNonNull(getContext()), 1.5f);
                 outRect.bottom = SizeUtils.dip2px(getContext(), 1.5f);
             }
         });
@@ -119,13 +116,16 @@ public class HomeFragment extends BaseFragment implements IHomeCallback, HomeArt
                 if(mMyBanner == null){
                     return;
                 }
+                //联动滑动问题
                 int measuredHeight1 = mMyBanner.getMeasuredHeight();
                 mNestedScrollView.setHeaderHeight(measuredHeight1);
+                //防止RecyclerView不断地create和bind
                 LogUtils.d(HomeFragment.class,"---------height-->"+measuredHeight1);
                 int measuredHeight = mHomeLayout.getMeasuredHeight();
                 ViewGroup.LayoutParams layoutParams = mHomeRecyclerView.getLayoutParams();
                 layoutParams.height = measuredHeight;
                 mHomeRecyclerView.setLayoutParams(layoutParams);
+
                 if(measuredHeight!=0){
                     mHomeLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 }

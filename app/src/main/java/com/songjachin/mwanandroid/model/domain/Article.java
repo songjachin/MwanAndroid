@@ -6,6 +6,7 @@ import java.util.List;
  * Created by matthew
  */
 public class Article {
+
     /**
      * apkLink :
      * author : 浪淘沙xud

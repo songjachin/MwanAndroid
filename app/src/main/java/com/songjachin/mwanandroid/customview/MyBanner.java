@@ -36,7 +36,7 @@ public class MyBanner extends LinearLayout {
         super(context, attrs, defStyleAttr);
         //ViewPager
         //TextView
-        //点容器，点需要动态地创建，因为点的个数跟内容个数有关系，同学们现在明白第三个参数为什么填写true了吧。
+        //点容器，点需要动态地创建，因为点的个数跟内容个数有关系，第三个参数为什么填写true。
         //填写true的话，就是自动填充到前面的viewGroup里
         LayoutInflater.from(context).inflate(R.layout.layout_my_banner,this,true);
         //等价于如下：
@@ -97,8 +97,8 @@ public class MyBanner extends LinearLayout {
                 View point = new View(getContext());
                 int size = SizeUtils.dip2px(getContext(),5);
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(4*size,size);
-                layoutParams.leftMargin = SizeUtils.dip2px(getContext(), 5);
-                layoutParams.rightMargin = SizeUtils.dip2px(getContext(), 5);
+                layoutParams.leftMargin = size;
+                layoutParams.rightMargin = size;
                 point.setLayoutParams(layoutParams);
                 if (i == 0) {
                     point.setBackgroundColor(Color.parseColor("#ff0000"));

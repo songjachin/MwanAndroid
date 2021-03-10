@@ -49,7 +49,7 @@ public class LoopViewPager  extends ViewPager {
     public void startLoop() {
         isLoop = true;
         //先拿到当前的位置
-        postDelayed(mTask,3000);
+        post(mTask);
     }
 
 

@@ -1,7 +1,5 @@
 package com.songjachin.mwanandroid.model;
 
-import android.database.Observable;
-
 import com.songjachin.mwanandroid.model.domain.ArticleBean;
 import com.songjachin.mwanandroid.model.domain.ArticleHomeBean;
 import com.songjachin.mwanandroid.model.domain.Articles;

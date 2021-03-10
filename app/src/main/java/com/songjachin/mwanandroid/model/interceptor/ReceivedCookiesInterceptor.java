@@ -30,7 +30,7 @@ public class ReceivedCookiesInterceptor implements Interceptor {
             SharedPreferences sharedPreferences = BaseApplication.getAppContext().getSharedPreferences("cookieData", Context.MODE_PRIVATE);
             SharedPreferences.Editor edit = sharedPreferences.edit();
             edit.putStringSet("cookie",cookies);
-            edit.commit();
+            edit.apply();
         }
         return originalResponse;
     }

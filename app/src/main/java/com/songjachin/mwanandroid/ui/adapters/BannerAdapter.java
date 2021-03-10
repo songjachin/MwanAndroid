@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
 import com.songjachin.mwanandroid.customview.MyBanner;
-import com.songjachin.mwanandroid.customview.RoundRectImageView;
 import com.songjachin.mwanandroid.model.domain.BannerBean;
 
 import java.util.ArrayList;
@@ -30,10 +29,18 @@ public class BannerAdapter extends MyBanner.InnerPagerAdapter {
         BannerBean.DataBean bean = mList.get(realPosition);
 
         String coverUrl = bean.getImagePath();
-        RoundRectImageView iv = new RoundRectImageView(container.getContext());
+
+//        View view = View.inflate(mContext, R.layout.item_base,null);
+//        TextView tv = (TextView) view.findViewById(R.id.tv);
+//        tv.setText(mData.get(position));
+//        container.addView(view);
+//        return view;
+
+        ImageView iv = new ImageView(container.getContext());
         ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         iv.setLayoutParams(layoutParams);
         iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
         Glide.with(container.getContext()).load(coverUrl).into(iv);
 
         iv.setOnClickListener(new View.OnClickListener() {

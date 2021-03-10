@@ -32,18 +32,18 @@ public class SearchPresenter implements ISearchPresenter {
         mJsonCacheUtil = JsonCacheUtil.getInstance();
     }
 
-    private static volatile SearchPresenter instance;
+    private static volatile SearchPresenter INSTANCE;
 
     public static SearchPresenter getInstance(){
-        if (instance == null) {
+        if (INSTANCE == null) {//减少不必要的同步
             synchronized (SearchPresenter.class){
-                if (instance == null) {
-                    instance =new SearchPresenter();
+                if (INSTANCE == null) {//同步后再次判断
+                    INSTANCE =new SearchPresenter();
                 }
             }
         }
 
-        return instance;
+        return INSTANCE;
     }
 
     public static final int DEFAULT_PAGE = 0;

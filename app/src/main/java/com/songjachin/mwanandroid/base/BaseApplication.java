@@ -21,13 +21,13 @@ import retrofit2.Retrofit;
  */
 public class BaseApplication extends Application {
     private static Context appContext;
-    private  static android.os.Handler sHandler;
+    private  static Handler sHandler;
 
     @Override
     public void onCreate() {
         super.onCreate();
         appContext = getBaseContext();
-        sHandler = new android.os.Handler();
+        sHandler = new Handler();
 
         if(User.getInstance().isLoginStatus()){
             String count = User.getInstance().getUsername();
