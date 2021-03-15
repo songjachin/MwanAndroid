@@ -29,7 +29,7 @@ public class BannerAdapter extends MyBanner.InnerPagerAdapter {
         BannerBean.DataBean bean = mList.get(realPosition);
 
         String coverUrl = bean.getImagePath();
-<<<<<<< HEAD
+
 
 //        View view = View.inflate(mContext, R.layout.item_base,null);
 //        TextView tv = (TextView) view.findViewById(R.id.tv);
@@ -37,8 +37,7 @@ public class BannerAdapter extends MyBanner.InnerPagerAdapter {
 //        container.addView(view);
 //        return view;
 
-=======
->>>>>>> 7f475a1... finish the most
+
         ImageView iv = new ImageView(container.getContext());
         ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         iv.setLayoutParams(layoutParams);

@@ -36,10 +36,7 @@ public class JsonCacheUtil {
     public void saveCache(String key, Object value, long duration){
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         String valueStr = mGson.toJson(value);
-<<<<<<< HEAD
-        //duration表示持续时间，这里没有用
-=======
->>>>>>> 7f475a1... finish the most
+
         if(duration!=-1L){
             duration += System.currentTimeMillis();
         }
@@ -60,10 +57,7 @@ public class JsonCacheUtil {
         }
         CacheWithDuration cacheWithDuration = mGson.fromJson(valueWithDuration, CacheWithDuration.class);
         long duration = cacheWithDuration.getDuration();
-<<<<<<< HEAD
-        //超过期限则丢弃
-=======
->>>>>>> 7f475a1... finish the most
+
         if(duration!=-1&&duration -System.currentTimeMillis()<=0){
             return null;
         }else{

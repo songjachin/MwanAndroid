@@ -3,13 +3,12 @@ package com.songjachin.mwanandroid.ui.mine;
 import com.songjachin.mwanandroid.base.BaseApplication;
 import com.songjachin.mwanandroid.utils.FileUtil;
 
-<<<<<<< HEAD
-=======
 import java.io.IOException;
 import java.io.ObjectInputStream;
->>>>>>> 7f475a1... finish the most
 import java.io.ObjectStreamException;
 import java.io.Serializable;
+
+import retrofit2.http.HEAD;
 
 /**
  * Created by matthew
@@ -44,7 +43,7 @@ public class User implements Serializable {
 
     private String mUsername;//用户名
     private String mPassword;//密码
-<<<<<<< HEAD
+
     private  int level;
     private int rankNum;
     private int rank;
@@ -74,21 +73,15 @@ public class User implements Serializable {
     }
 
     private boolean mLoginStatus = false;//登陆状态
-=======
-    private boolean mLoginStatus;//登陆状态
->>>>>>> 7f475a1... finish the most
+
 
     /**
      * 退出登录时使用
      */
     public void reset() {
-<<<<<<< HEAD
         mUsername = "";
         mPassword = "";
-=======
-        mUsername = null;
-        mPassword = null;
->>>>>>> 7f475a1... finish the most
+
         mLoginStatus = false;
         save();
     }
@@ -128,15 +121,11 @@ public class User implements Serializable {
         return instance;
     }
 
-<<<<<<< HEAD
+
 //    private void readObject(ObjectInputStream os) throws IOException, ClassNotFoundException {
 //        os.defaultReadObject();
 //    }
-=======
-    private void readObject(ObjectInputStream os) throws IOException, ClassNotFoundException {
-        os.defaultReadObject();
-    }
->>>>>>> 7f475a1... finish the most
+
 
     public Object Clone() throws CloneNotSupportedException {
         return super.clone();

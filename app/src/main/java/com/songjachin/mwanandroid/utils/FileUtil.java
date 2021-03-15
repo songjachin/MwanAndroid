@@ -6,16 +6,14 @@ import android.os.Environment;
 import java.io.Closeable;
 import java.io.File;
 import java.io.FileInputStream;
-<<<<<<< HEAD
-=======
-import java.io.FileNotFoundException;
->>>>>>> 7f475a1... finish the most
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.math.BigDecimal;
 import java.util.Objects;
+
+
 
 /**
  * Created by matthew
@@ -27,27 +25,22 @@ public class FileUtil {
      * @param fileName
      * @return
      */
-<<<<<<< HEAD
+
     //restore 恢复
     public static Object restoreObject(Context context,String fileName){
         //文件输入流
-=======
-    public static Object restoreObject(Context context,String fileName){
->>>>>>> 7f475a1... finish the most
+
         FileInputStream fileInputStream = null;
         ObjectInputStream objectInputStream =null;
         Object object =null;
         try{
-<<<<<<< HEAD
+
             //文件输入流打开文件
             fileInputStream = context.openFileInput(fileName);
 
             objectInputStream = new ObjectInputStream(fileInputStream);
             //读取对象
-=======
-            fileInputStream = context.openFileInput(fileName);
-            objectInputStream = new ObjectInputStream(fileInputStream);
->>>>>>> 7f475a1... finish the most
+
             object = objectInputStream.readObject();
         } catch (ClassNotFoundException | IOException e){
             e.printStackTrace();
@@ -62,15 +55,12 @@ public class FileUtil {
         FileOutputStream fileOutputStream = null;
         ObjectOutputStream objectOutputStream = null;
         try{
-<<<<<<< HEAD
+
             //文件输出流打开文件
             fileOutputStream =context.openFileOutput(fileName,Context.MODE_PRIVATE);
             objectOutputStream = new ObjectOutputStream(fileOutputStream);
             //写入对象
-=======
-            fileOutputStream =context.openFileOutput(fileName,Context.MODE_PRIVATE);
-            objectOutputStream = new ObjectOutputStream(fileOutputStream);
->>>>>>> 7f475a1... finish the most
+
             objectOutputStream.writeObject(object);
         } catch (IOException e){
             e.printStackTrace();
@@ -191,3 +181,5 @@ public class FileUtil {
     }
 
 }
+
+

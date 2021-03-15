@@ -32,32 +32,18 @@ public class SearchPresenter implements ISearchPresenter {
         mJsonCacheUtil = JsonCacheUtil.getInstance();
     }
 
-<<<<<<< HEAD
+
     private static volatile SearchPresenter INSTANCE;
 
     public static SearchPresenter getInstance(){
         if (INSTANCE == null) {//减少不必要的同步
-            synchronized (SearchPresenter.class){
+            synchronized (SearchPresenter.class) {
                 if (INSTANCE == null) {//同步后再次判断
-                    INSTANCE =new SearchPresenter();
-=======
-    private static volatile SearchPresenter instance;
-
-    public static SearchPresenter getInstance(){
-        if (instance == null) {
-            synchronized (SearchPresenter.class){
-                if (instance == null) {
-                    instance =new SearchPresenter();
->>>>>>> 7f475a1... finish the most
+                    INSTANCE = new SearchPresenter();
                 }
             }
         }
-
-<<<<<<< HEAD
         return INSTANCE;
-=======
-        return instance;
->>>>>>> 7f475a1... finish the most
     }
 
     public static final int DEFAULT_PAGE = 0;
@@ -116,19 +102,11 @@ public class SearchPresenter implements ISearchPresenter {
     private void saveHistory(String history){
         Histories histories = mJsonCacheUtil.getValue(KEY_HISTORIES,Histories.class);
         //如果说已经在了，就干掉，然后再添加
-<<<<<<< HEAD
         List<String> historiesList = histories.getHistories();
         if(histories != null && histories.getHistories() != null) {
             //两者不空则去重
             historiesList.remove(history);
-=======
-        List<String> historiesList = null;
-        if(histories != null && histories.getHistories() != null) {
-            historiesList = histories.getHistories();
-            if(historiesList.contains(history)) {
-                historiesList.remove(history);
-            }
->>>>>>> 7f475a1... finish the most
+
         }
         //去重完成
         //处理没有数据的情况
