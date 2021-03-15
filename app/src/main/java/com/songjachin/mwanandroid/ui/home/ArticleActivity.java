@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.text.Html;
-import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -32,8 +31,8 @@ public class ArticleActivity extends BaseActivity {
     Toolbar mToolbar;
     @BindView(R.id.container)
     FrameLayout mFrameLayout;
-    @BindView(R.id.web_linear)
-    LinearLayout mWebLinear;
+//   @BindView(R.id.web_linear)
+//    LinearLayout mWebLinear;
 
     private String mUrl;
     private String mTitle;
@@ -137,7 +136,7 @@ public class ArticleActivity extends BaseActivity {
         mSettings.setSupportZoom(true);
         mSettings.setBuiltInZoomControls(true);
         //不显示缩放按钮
-        mSettings.setDisplayZoomControls(false);
+        mSettings.setDisplayZoomControls(true);
         //设置自适应屏幕，两者合用
         //将图片调整到适合WebView的大小
         mSettings.setUseWideViewPort(true);

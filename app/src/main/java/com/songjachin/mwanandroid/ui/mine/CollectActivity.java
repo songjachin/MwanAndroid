@@ -3,10 +3,8 @@ package com.songjachin.mwanandroid.ui.mine;
 import android.annotation.SuppressLint;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
-
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,16 +17,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.songjachin.mwanandroid.R;
 import com.songjachin.mwanandroid.base.BaseApplication;
 import com.songjachin.mwanandroid.database.HistoryArticle;
-import com.songjachin.mwanandroid.model.Api;
 import com.songjachin.mwanandroid.model.domain.IBaseArticleInfo;
 import com.songjachin.mwanandroid.presenter.CollectionUtils;
 import com.songjachin.mwanandroid.presenter.IUnCollectCallback;
 import com.songjachin.mwanandroid.presenter.mine.CollectPresenter;
 import com.songjachin.mwanandroid.presenter.mine.HistoryPresenter;
 import com.songjachin.mwanandroid.ui.adapters.CollectAdapter;
-import com.songjachin.mwanandroid.ui.adapters.HomeArticleAdapter;
 import com.songjachin.mwanandroid.ui.home.ArticleActivity;
-import com.songjachin.mwanandroid.utils.RetrofitManager;
 import com.songjachin.mwanandroid.utils.SizeUtils;
 import com.songjachin.mwanandroid.utils.ToastUtil;
 import com.songjachin.mwanandroid.view.mine.ICollectActivityCallback;
@@ -40,7 +35,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import retrofit2.Retrofit;
 
 /**
  * Created by matthew
@@ -66,8 +60,6 @@ public class CollectActivity extends AppCompatActivity implements CollectAdapter
         initPresenter();
         loadData();
     }
-
-
 
     private void initView() {
         initToolbar();

@@ -53,7 +53,7 @@ import butterknife.Unbinder;
 /**
  * Created by matthew
  */
-public class SearchActivity extends AppCompatActivity implements ISearchCallback, TextFlowLayout.OnFlowTextItemClickListener, SearchAdapter.OnItemClickListener {
+public class  SearchActivity extends AppCompatActivity implements ISearchCallback, TextFlowLayout.OnFlowTextItemClickListener, SearchAdapter.OnItemClickListener {
 
     @BindView(R.id.iv_back)
     ImageView btnBack;

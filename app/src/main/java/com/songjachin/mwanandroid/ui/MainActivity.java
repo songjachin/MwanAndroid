@@ -3,6 +3,7 @@ package com.songjachin.mwanandroid.ui;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -13,15 +14,26 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.songjachin.mwanandroid.R;
 import com.songjachin.mwanandroid.base.BaseFragment;
+import com.songjachin.mwanandroid.model.Api;
+import com.songjachin.mwanandroid.model.domain.BaseResponse;
+import com.songjachin.mwanandroid.model.domain.Login;
 import com.songjachin.mwanandroid.ui.home.HomeFragment;
 import com.songjachin.mwanandroid.ui.mine.MineFragment;
+import com.songjachin.mwanandroid.ui.mine.User;
 import com.songjachin.mwanandroid.ui.navigation.NavigationFragment;
 import com.songjachin.mwanandroid.ui.talk.TalkFragment;
 import com.songjachin.mwanandroid.ui.wx.WxFragment;
+import com.songjachin.mwanandroid.utils.RetrofitManager;
+
+import java.net.HttpURLConnection;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -46,7 +58,30 @@ public class MainActivity extends AppCompatActivity {
         initView();
         initFragment();
         initListener();
-        
+        if(User.getInstance().isLoginStatus()){
+            String count = User.getInstance().getUsername();
+            String password = User.getInstance().getPassword();
+
+            if(!TextUtils.isEmpty(count)&& !TextUtils.isEmpty(password)){
+                Retrofit retrofit = RetrofitManager.getInstance().getRetrofit();
+                Api api = retrofit.create(Api.class);
+                Call<BaseResponse<Login>> login = api.login(count, password);
+                login.enqueue(new Callback<BaseResponse<Login>>() {
+                    @Override
+                    public void onResponse(Call<BaseResponse<Login>> call, Response<BaseResponse<Login>> response) {
+                        if (response.code()== HttpURLConnection.HTTP_OK) {
+                            BaseResponse<Login> body = response.body();
+                            Login data = body.getData();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<BaseResponse<Login>> call, Throwable t) {
+
+                    }
+                });
+            }
+        }
     }
 
     private void initView() {

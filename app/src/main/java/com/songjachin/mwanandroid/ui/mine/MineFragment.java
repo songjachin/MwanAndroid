@@ -3,7 +3,6 @@ package com.songjachin.mwanandroid.ui.mine;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -15,8 +14,6 @@ import com.songjachin.mwanandroid.model.domain.Login;
 import com.songjachin.mwanandroid.model.domain.Ranking;
 import com.songjachin.mwanandroid.presenter.mine.MinePresenter;
 import com.songjachin.mwanandroid.view.mine.IMineCallback;
-
-import java.io.Serializable;
 
 import butterknife.BindView;
 
@@ -64,10 +61,6 @@ public class MineFragment extends BaseFragment implements IMineCallback {
                 startActivityForResult(intent, 1);
             }
         });
-        if (User.getInstance().isLoginStatus()) {
-            tvUserName.setText(User.getInstance().getUsername());
-            tvUserName.setClickable(false);
-        }
         mRanking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,7 +84,7 @@ public class MineFragment extends BaseFragment implements IMineCallback {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mActivity, HistoryActivity.class);
-                startActivityForResult(intent, 1);
+                startActivity(intent);
             }
         });
         logout.setOnClickListener(new View.OnClickListener() {
@@ -101,8 +94,21 @@ public class MineFragment extends BaseFragment implements IMineCallback {
                tvUserName.setText("点击登录");
                tvUserName.setClickable(true);
                tvUserId.setText("");
+                tvUserLevel.setText("");
+                tvUserRanking.setText("");
+                digitRank.setText("我的积分：");
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        if(User.getInstance().isLoginStatus()){
+            mPresenter.getRanking();
+            tvUserName.setText(User.getInstance().getUsername());
+            tvUserName.setClickable(false);
+        }
+        super.onResume();
     }
 
     @Override
@@ -144,7 +150,7 @@ public class MineFragment extends BaseFragment implements IMineCallback {
 
     @Override
     public void onError() {
-
+        setUpState(State.ERROR);
     }
 
     @Override

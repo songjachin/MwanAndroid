@@ -3,8 +3,6 @@ package com.songjachin.mwanandroid.ui.mine;
 import com.songjachin.mwanandroid.base.BaseApplication;
 import com.songjachin.mwanandroid.utils.FileUtil;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectStreamException;
 import java.io.Serializable;
 
@@ -41,14 +39,42 @@ public class User implements Serializable {
 
     private String mUsername;//用户名
     private String mPassword;//密码
+    private  int level;
+    private int rankNum;
+    private int rank;
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public int getRankNum() {
+        return rankNum;
+    }
+
+    public void setRankNum(int rankNum) {
+        this.rankNum = rankNum;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
+
     private boolean mLoginStatus = false;//登陆状态
 
     /**
      * 退出登录时使用
      */
     public void reset() {
-        mUsername = null;
-        mPassword = null;
+        mUsername = "";
+        mPassword = "";
         mLoginStatus = false;
         save();
     }
@@ -88,9 +114,9 @@ public class User implements Serializable {
         return instance;
     }
 
-    private void readObject(ObjectInputStream os) throws IOException, ClassNotFoundException {
-        os.defaultReadObject();
-    }
+//    private void readObject(ObjectInputStream os) throws IOException, ClassNotFoundException {
+//        os.defaultReadObject();
+//    }
 
     public Object Clone() throws CloneNotSupportedException {
         return super.clone();

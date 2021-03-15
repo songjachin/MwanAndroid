@@ -25,12 +25,16 @@ public class FileUtil {
      */
     //restore 恢复
     public static Object restoreObject(Context context,String fileName){
+        //文件输入流
         FileInputStream fileInputStream = null;
         ObjectInputStream objectInputStream =null;
         Object object =null;
         try{
+            //文件输入流打开文件
             fileInputStream = context.openFileInput(fileName);
+
             objectInputStream = new ObjectInputStream(fileInputStream);
+            //读取对象
             object = objectInputStream.readObject();
         } catch (ClassNotFoundException | IOException e){
             e.printStackTrace();
@@ -45,8 +49,10 @@ public class FileUtil {
         FileOutputStream fileOutputStream = null;
         ObjectOutputStream objectOutputStream = null;
         try{
+            //文件输出流打开文件
             fileOutputStream =context.openFileOutput(fileName,Context.MODE_PRIVATE);
             objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            //写入对象
             objectOutputStream.writeObject(object);
         } catch (IOException e){
             e.printStackTrace();
